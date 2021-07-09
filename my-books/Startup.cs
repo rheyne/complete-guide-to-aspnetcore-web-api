@@ -34,7 +34,7 @@ namespace my_books
             services.AddControllers();
 
             //Configure DBContext with SQL
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+            services.AddDbContext<AppDbContext>(options => options.UseMySql(ConnectionString, new MariaDbServerVersion("10.5.11")));
 
             services.AddSwaggerGen(c =>
             {

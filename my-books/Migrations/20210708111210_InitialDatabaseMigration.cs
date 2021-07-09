@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace my_books.Migrations
 {
+    // Created via NuGet-Paket-Manager -> Paket-Manager-Konsole -> "Add-Migration InitialDatabaseMigration"
+    // Executed via NuGet-Paket-Manager -> Paket-Manager-Konsole -> "Update-Database"
     public partial class InitialDatabaseMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -24,7 +24,7 @@ namespace my_books.Controllers
         }
 
         [HttpGet("get-publisher-by-id/{id}")]
-        public Publisher GetPublisherById(int id)
+        public ActionResult<Publisher> GetPublisherById(int id)
         {
             var _response = _publishersService.GetPublisherById(id);
             if (_response != null)
@@ -34,8 +34,7 @@ namespace my_books.Controllers
             }
             else
             {
-                //return NotFound();
-                return null;
+                return NotFound();
             }
         }
 

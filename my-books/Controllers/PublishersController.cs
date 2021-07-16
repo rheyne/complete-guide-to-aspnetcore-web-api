@@ -31,7 +31,7 @@ namespace my_books.Controllers
         }
 
         [HttpPost("add-publisher")]
-        public IActionResult AddAuthor([FromBody] PublisherVM publisher)
+        public IActionResult AddPublisher([FromBody] PublisherVM publisher)
         {
             _publishersService.AddPublisher(publisher);
             return Ok();

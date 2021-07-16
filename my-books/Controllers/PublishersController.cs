@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using my_books.Data.Models;
 using my_books.Data.Services;
 using my_books.Data.ViewModels;
 
@@ -20,6 +21,22 @@ namespace my_books.Controllers
         {
             _publishersService.AddPublisher(publisher);
             return Ok();
+        }
+
+        [HttpGet("get-publisher-by-id/{id}")]
+        public Publisher GetPublisherData(int id)
+        {
+            var _response = _publishersService.GetPublisherById(id);
+            if (_response != null)
+            {
+                //return Ok(_response);
+                return _response;
+            }
+            else
+            {
+                //return NotFound();
+                return null;
+            }
         }
 
         [HttpGet("get-publisher-book-with-authors/{id}")]

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,7 +42,7 @@ namespace my_books
                 config.AssumeDefaultVersionWhenUnspecified = true;
 
                 //config.ApiVersionReader = new HeaderApiVersionReader("custom-version-header");
-                config.ApiVersionReader = new MediaTypeApiVersionReader();
+                //config.ApiVersionReader = new MediaTypeApiVersionReader();
             });
 
             services.AddSwaggerGen(c =>

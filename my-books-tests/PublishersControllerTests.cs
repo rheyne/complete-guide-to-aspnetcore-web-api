@@ -5,6 +5,7 @@ using my_books.Controllers;
 using my_books.Data;
 using my_books.Data.Models;
 using my_books.Data.Services;
+using my_books.Data.ViewModels;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,20 +52,52 @@ namespace my_books_tests
         }
 
         [Test, Order(2)]
-        public void HTTPGET_GetPublisherById_ReturnOk_Test()
+        public void HTTPGET_GetPublisherById_ReturnsOk_Test()
         {
-            IActionResult actionResult = publishersController.GetPublisherById(1);
+            int publisherId = 1;
+
+            IActionResult actionResult = publishersController.GetPublisherById(publisherId);
+
             Assert.That(actionResult, Is.TypeOf<OkObjectResult>());
             var actionResultData = (actionResult as OkObjectResult).Value as Publisher;
-            Assert.That(actionResultData.Name, Is.EqualTo("Publisher 1"));
             Assert.That(actionResultData.Id, Is.EqualTo(1));
+            Assert.That(actionResultData.Name, Is.EqualTo("publisher 1").IgnoreCase);
         }
 
         [Test, Order(3)]
-        public void HTTPGET_GetPublisherById_ReturnBadRequest_Test()
+        public void HTTPGET_GetPublisherById_ReturnsNotFound_Test()
         {
-            IActionResult actionResult = publishersController.GetPublisherById(77);
+            int publisherId = 99;
+
+            IActionResult actionResult = publishersController.GetPublisherById(publisherId);
+
             Assert.That(actionResult, Is.TypeOf<NotFoundResult>());
+        }
+
+        [Test, Order(4)]
+        public void HTTPPOST_AddPublisher_ReturnsCreated_Test()
+        {
+            var newPublisherVM = new PublisherVM()
+            {
+                Name = "New Publisher"
+            };
+
+            IActionResult actionResult = publishersController.AddPublisher(newPublisherVM);
+
+            Assert.That(actionResult, Is.TypeOf<CreatedResult>());
+        }
+
+        [Test, Order(5)]
+        public void HTTPPOST_AddPublisher_ReturnsBadRequest_Test()
+        {
+            var newPublisherVM = new PublisherVM()
+            {
+                Name = "123 New Publisher"
+            };
+
+            IActionResult actionResult = publishersController.AddPublisher(newPublisherVM);
+
+            Assert.That(actionResult, Is.TypeOf<BadRequestObjectResult>());
         }
 
         [OneTimeTearDown]

@@ -50,6 +50,23 @@ namespace my_books_tests
             Assert.That(actionResultDataSecondPage.Count, Is.EqualTo(1));
         }
 
+        [Test, Order(2)]
+        public void HTTPGET_GetPublisherById_ReturnOk_Test()
+        {
+            IActionResult actionResult = publishersController.GetPublisherById(1);
+            Assert.That(actionResult, Is.TypeOf<OkObjectResult>());
+            var actionResultData = (actionResult as OkObjectResult).Value as Publisher;
+            Assert.That(actionResultData.Name, Is.EqualTo("Publisher 1"));
+            Assert.That(actionResultData.Id, Is.EqualTo(1));
+        }
+
+        [Test, Order(3)]
+        public void HTTPGET_GetPublisherById_ReturnBadRequest_Test()
+        {
+            IActionResult actionResult = publishersController.GetPublisherById(77);
+            Assert.That(actionResult, Is.TypeOf<NotFoundResult>());
+        }
+
         [OneTimeTearDown]
         public void CleanUp()
         {
